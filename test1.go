@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	a := []int{5, 5, 2, 6}
+	a := []int{20, 5 , 10, 3}
 	if len(a) < 2 {
 		return
 	}
@@ -14,7 +14,11 @@ func main() {
 			max2 = max1
 			max1 = value
 			value = max2
-		} 
+		} else if (value < max1 ) {
+			max2 = max1
+			max1 = value
+			value = max2 
+		}
 
 	}
 	fmt.Print(max2)
