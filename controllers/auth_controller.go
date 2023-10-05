@@ -6,6 +6,8 @@ import (
 	"thuchanh_go/database"
 	"thuchanh_go/models"
 	"thuchanh_go/types"
+
+	"github.com/zeromicro/go-zero/core/logx"
 )
 
 func GetUserLogic(req types.GetUserReq) (*types.GetUserRes, error) {
@@ -16,6 +18,7 @@ func GetUserLogic(req types.GetUserReq) (*types.GetUserRes, error) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	logx.Info(req)
 	//get data
 	var user models.UserTbl
 	var row = db.QueryRow("SELECT * FROM user_tbl WHERE id = " + strconv.FormatInt(req.UserID, 10))

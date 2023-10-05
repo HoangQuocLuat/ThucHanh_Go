@@ -13,6 +13,7 @@ func main() {
 	// router
 	r.GET("/user/:user_id", handler.GetUserHandler())
 	r.POST("/user/regis", handler.PostUserHandler())
+	r.PUT("user/upacc/:user_id", handler.PutUserHandler())
 	// run server
 	r.Run("127.0.0.1:8888")
 }

@@ -21,3 +21,8 @@ type GetUserRes struct {
 	Hashpassword 	string 	`json:"hashpassword"`
 	Email        	string 	`json:"email"`
 }
+
+type PutUserReq struct {
+	Hashpassword	string 	`json:"hashpassword"`
+	Email			string	`json:"email"`
+}
