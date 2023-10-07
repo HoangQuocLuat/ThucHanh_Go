@@ -9,7 +9,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-func PutUserLogic(req types.PutUserReq, reqId types.GetUserReq) error {
+func PutUserLogic(req types.PutUserReq, reqId types.GetIdUserReq) error {
 	db, err := database.DBConn()
 	defer db.Close()
 	if err != nil {

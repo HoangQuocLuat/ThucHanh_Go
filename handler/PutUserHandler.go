@@ -17,7 +17,7 @@ func PutUserHandler() gin.HandlerFunc {
 			panic(err)
 		}
 
-        var id types.GetUserReq
+		var id types.GetIdUserReq
 		err = ctx.ShouldBindUri(&id)
 		if err != nil {
 			panic(err)

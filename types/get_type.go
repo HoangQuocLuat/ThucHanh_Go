@@ -1,9 +1,13 @@
 package types
 
-type GetUserReq struct {
+type GetIdUserReq struct {
 	UserID int64 `uri:"user_id"`
 	// Name 	string 	`form:"name"`
 	// Password string `json:"password"`
+}
+type GetUserReq struct {
+	Name 			string 	`json:"name"`
+	Hashpassword	string	`json:"hashpassword"`
 }
 
 type PostUserRegisReq struct {
@@ -20,6 +24,12 @@ type GetUserRes struct {
 	Name         	string 	`json:"name"`
 	Hashpassword 	string 	`json:"hashpassword"`
 	Email        	string 	`json:"email"`
+	Result          Result  `json:"result"`
+}
+
+type Result struct {
+	Code int64 `json:"code"`
+	Message string `json:"message"`
 }
 
 type PutUserReq struct {

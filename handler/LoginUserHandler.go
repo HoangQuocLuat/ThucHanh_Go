@@ -7,15 +7,17 @@ import (
 
 	"github.com/gin-gonic/gin"
 )
-func GetUserHandler() gin.HandlerFunc {
+
+func LoginUserHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		//lay data input
 		var req types.GetUserReq
-		var err = ctx.ShouldBindUri(&req)
+		var err = ctx.ShouldBindJSON(&req)
 		if err != nil {
 			panic(err)
 		}
 
+		//xử lý dữ liệu và đưa ra kết quả
 		res, err := controllers.GetUserLogic(req)
 		if err != nil {
 			ctx.JSON(http.StatusNotFound, nil)
