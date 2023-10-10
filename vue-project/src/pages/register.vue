@@ -5,7 +5,7 @@
     <div class="signin-form-header">
       <span class="title-header">ĐĂNG KÝ TÀI KHOẢN MỚI MIỄN PHÍ</span>
     </div>
-    <div id="login-body">
+    <div id="signin-body">
       <div class="label-input">Họ và tên</div>
       <input type="text" placeholder="Nhập họ và tên của bạn" />
 
@@ -13,7 +13,7 @@
       <input type="text" placeholder="Nhập tên đăng nhập của bạn" />
 
       <div class="label-input">Mật khẩu</div>
-      <input type="password" placeholder="" />
+      <input type="password" placeholder="* * * * * * * *" />
 
       <div class="label-input">Nhập lại mật khẩu</div>
       <input type="password" placeholder="" />
@@ -21,7 +21,7 @@
       <div class="label-input">Email</div>
       <input type="text" placeholder="Nhập email của bạn" />
 
-      <div class="login-button">Đăng ký</div>
+      <div class="signin-button">Đăng ký</div>
       <p class="login-with">Hoặc</p>
       <div
         style="display: flex; justify-content: space-around; padding-top: 10px"
@@ -59,7 +59,7 @@
 body {
   background: #f0f2f5;
   display: flex;
-  height: 120vh;
+  height: 100vh;
   justify-content: center;
   align-items: center;
 }
@@ -67,7 +67,7 @@ body {
 #signin-form {
   width: 600px;
   height: auto;
-  margin-top: 62px;
+  margin-top: 120px;
   margin-bottom: 63px;
   border-radius: 14px;
   background: var(--light-greyscale-greyscale-200, #fff);
@@ -93,7 +93,7 @@ body {
   text-transform: uppercase;
 }
 
-#login-body {
+#signin-body {
   padding: 36.74px 80px 0px 80px;
 }
 
@@ -107,7 +107,7 @@ body {
   /* 137.5% */
 }
 
-#login-body input {
+#signin-body input {
   display: flex;
   width: 440px;
   height: 22px;
@@ -131,10 +131,11 @@ body {
   /* 137.5% */
 }
 
-.login-button {
+.signin-button {
+  margin: 0 auto;
   margin-top: 40px;
   display: flex;
-  width: 440px;
+  width: 245px;
   height: 20px;
   padding: 15px 15px;
   justify-content: center;
@@ -183,6 +184,7 @@ body {
 }
 
 .footer {
+  padding-bottom: 30px;
   margin-top: 51px;
   text-align: center;
 }

@@ -1,4 +1,21 @@
-<script>
+<script setup>
+username = ref('')
+password = ref('')
+function login() {
+  fetch("http://127.0.0.1/user/login", {
+    methor: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      username: "",
+      password: ""
+    })
+  }).then((res) => res.json().then(res => {
+    
+  }))
+}
+
 </script>
 
 <template>
@@ -10,7 +27,7 @@
       </div>
       <div id="login-body">
         <div class="label-input">Tên đăng nhập</div>
-        <input type="text" />
+        <input type="text" v-model="username"/>
         <div
           style="
             margin-top: 40px;
@@ -24,8 +41,8 @@
             ><a href="google.com" id="forgot-password">Quên mật khẩu?</a></span
           >
         </div>
-        <input type="password" />
-        <div class="login-button">Đăng nhập</div>
+        <input type="password" v-model="password"/>
+        <div class="login-button" @click="login">Đăng nhập</div>
         <p class="login-with">hoặc đăng nhập bằng</p>
         <div
           style="
