@@ -6,41 +6,77 @@
       <span class="title-header">ĐĂNG KÝ TÀI KHOẢN MỚI MIỄN PHÍ</span>
     </div>
     <div id="signin-body">
-      <div class="label-input">Họ và tên</div>
+      <div class="label-input_sig">Họ và tên</div>
       <input type="text" placeholder="Nhập họ và tên của bạn" />
 
-      <div class="label-input">Tên đăng nhập</div>
+      <div class="label-input_sig">Tên đăng nhập</div>
       <input type="text" placeholder="Nhập tên đăng nhập của bạn" />
 
-      <div class="label-input">Mật khẩu</div>
-      <input type="password" placeholder="* * * * * * * *" />
+      <div class="label-input_sig">Mật khẩu</div>
+      <div class="input-pass" style="position: relative">
+        <input
+          type="password"
+          v-model="password"
+          placeholder="* * * * * * * *"
+        />
+        <font-awesome-icon
+          style="position: absolute; right: 2px; top: 32%"
+          icon="fa-solid fa-eye-slash"
+        />
+      </div>
+      <div class="label-input_sig">Nhập lại mật khẩu</div>
+      <div class="input-pass" style="position: relative">
+        <input
+          type="password"
+          v-model="password"
+          placeholder="* * * * * * * *"
+        />
+        <font-awesome-icon
+          style="position: absolute; right: 2px; top: 32%"
+          icon="fa-solid fa-eye-slash"
+        />
+      </div>
 
-      <div class="label-input">Nhập lại mật khẩu</div>
-      <input type="password" placeholder="" />
-
-      <div class="label-input">Email</div>
+      <div class="label-input_sig">Email</div>
       <input type="text" placeholder="Nhập email của bạn" />
-
+      <div style="display: flex; margin-top: 24px">
+        <input style="margin-left: 0px; display: block" type="checkbox" />
+        <label style="margin-left: 3px">
+          Tôi đồng ý với các
+          <router-link to="#">điều kiện và điều khoản</router-link>
+        </label>
+      </div>
       <div class="signin-button">Đăng ký</div>
-      <p class="login-with">Hoặc</p>
+      <div style="border: 1px solid #EEE; margin-top: 30px; margin-bottom: 20px; position: relative;">
+        <p class="signin-with" style="position: absolute; left: 50%; transform: translate(-50%, -50%); background-color: white;">Hoặc</p>
+      </div>
       <div
         style="display: flex; justify-content: space-around; padding-top: 10px"
       >
-        <span class="otherway">
-          <i
-            class="fa fa-brands fa-facebook"
-            style="font-size: 16px; padding-right: 5px"
-          >
-          </i
-          >Facebook</span
+        <button
+          style="border-radius: 50%; height: 50px; width: 50px; border: none"
         >
-        <span class="otherway"
-          ><i
-            class="fa fa-brands fa-google"
-            style="font-size: 16px; padding-right: 5px"
-          ></i
-          >Google</span
+          <font-awesome-icon
+            style="height: 30px; width: 30px"
+            icon="fa-brands fa-facebook"
+          />
+        </button>
+        <button
+          style="border-radius: 50%; height: 50px; width: 50px; border: none"
         >
+          <font-awesome-icon
+            style="height: 30px; width: 30px"
+            icon="fa-brands fa-google-plus-g"
+          />
+        </button>
+        <button
+          style="border-radius: 50%; height: 50px; width: 50px; border: none"
+        >
+          <font-awesome-icon
+            style="height: 30px; width: 30px"
+            icon="fa-brands fa-apple"
+          />
+        </button>
       </div>
       <p class="footer">
         Bạn đã có tài khoản rồi?
@@ -59,7 +95,7 @@
 body {
   background: #f0f2f5;
   display: flex;
-  height: 100vh;
+  height: auto;
   justify-content: center;
   align-items: center;
 }
@@ -67,7 +103,7 @@ body {
 #signin-form {
   width: 600px;
   height: auto;
-  margin-top: 120px;
+  margin-top: 30px;
   margin-bottom: 63px;
   border-radius: 14px;
   background: var(--light-greyscale-greyscale-200, #fff);
@@ -97,7 +133,8 @@ body {
   padding: 36.74px 80px 0px 80px;
 }
 
-.label-input {
+.label-input_sig {
+  margin-top: 24px;
   color: var(--light-greyscale-greyscale-900, #000);
   font-family: Roboto;
   font-size: 16px;
@@ -107,7 +144,19 @@ body {
   /* 137.5% */
 }
 
-#signin-body input {
+#signin-body >input {
+  display: flex;
+  width: 440px;
+  height: 22px;
+  padding: 16px 15px;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #f7f7f7;
+  border: 0px;
+}
+.input-pass >input {
   display: flex;
   width: 440px;
   height: 22px;
@@ -156,8 +205,8 @@ body {
   line-height: normal;
 }
 
-.login-with {
-  margin-top: 30px;
+.signin-with {
+  
   color: var(--light-transparent-greyscale-65, rgba(0, 0, 0, 0.65));
   text-align: center;
   font-family: Roboto;

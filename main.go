@@ -2,8 +2,10 @@ package main
 
 import (
 	"thuchanh_go/handler"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -24,7 +26,7 @@ func main() {
 		ExposeHeaders:    []string{"Content-Type"},
 		AllowCredentials: true,
 	}))
-	
+
 	// run server
 	r.Run("127.0.0.1:8888")
 }

@@ -1,21 +1,43 @@
-<script setup>
-username = ref('')
-password = ref('')
-function login() {
-  fetch("http://127.0.0.1/user/login", {
-    methor: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      username: "",
-      password: ""
-    })
-  }).then((res) => res.json().then(res => {
-    
-  }))
+<script>
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      fetch("http://127.0.0.1:8888/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: this.username,
+          password: this.password,
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((resp) => {
+          if (resp.result.code != 0) {
+            alert("Thông tin tài khoản không chính xác ");
+            return;
+          }
+          setCookie("token", resp.token, 1);
+          setCookie("user", resp.users, 1);
 
+          this.$route.push("/home");
+        });
+    },
+  },
+};
 </script>
 
 <template>
@@ -27,7 +49,7 @@ function login() {
       </div>
       <div id="login-body">
         <div class="label-input">Tên đăng nhập</div>
-        <input type="text" v-model="username"/>
+        <input type="text" v-model="username" />
         <div
           style="
             margin-top: 40px;
@@ -41,7 +63,13 @@ function login() {
             ><a href="google.com" id="forgot-password">Quên mật khẩu?</a></span
           >
         </div>
-        <input type="password" v-model="password"/>
+        <div style="position: relative">
+          <input type="password" v-model="password" />
+          <font-awesome-icon
+            style="position: absolute; right: 2px; top: 32%"
+            icon="fa-solid fa-eye-slash"
+          />
+        </div>
         <div class="login-button" @click="login">Đăng nhập</div>
         <p class="login-with">hoặc đăng nhập bằng</p>
         <div
@@ -52,16 +80,18 @@ function login() {
           "
         >
           <span class="otherway">
-            <b-icon icon="facebook"></b-icon>
+            <font-awesome-icon
+              style="margin-right: 5px"
+              icon="fa-brands fa-facebook-f"
+            />
             Facebook
-          </span
-          >
-          <span class="otherway"
-            ><i
-              class="fa fa-brands fa-google"
-              style="font-size: 16px; padding-right: 5px"
-            ></i
-            >Google</span
+          </span>
+          <span class="otherway">
+            <font-awesome-icon
+              style="margin-right: 5px"
+              icon="fa-brands fa-google"
+            />
+            Google</span
           >
         </div>
         <p class="footer">
@@ -74,7 +104,7 @@ function login() {
 </template>
 
 <style>
-*{
+* {
   margin: 0;
   padding: 0;
 }
@@ -87,6 +117,7 @@ body {
 }
 
 #login-form {
+  margin-top: 30px;
   width: 600px;
   height: 589px;
   border-radius: 14px;
