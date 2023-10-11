@@ -5,6 +5,20 @@ function setCookie(cname, cvalue, exdays) {
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 export default {
   data() {
     return {
@@ -20,22 +34,29 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: this.username,
-          password: this.password,
+          name: this.username,
+          hashpassword: this.password,
         }),
       })
         .then((resp) => resp.json())
         .then((resp) => {
-          if (resp.result.code != 0) {
+          console.log(resp);
+          if (resp.result.code != 200) {
             alert("Thông tin tài khoản không chính xác ");
             return;
           }
-          setCookie("token", resp.token, 1);
-          setCookie("user", resp.users, 1);
+          setCookie("token", resp.token.token, 1);
 
-          this.$route.push("/home");
+          this.$router.push("/home");
         });
     },
+  },
+  created() {
+    console.log(getCookie("token"));
+    let token = getCookie("token");
+    if (token) {
+      this.$router.push("/home");
+    }
   },
 };
 </script>
@@ -70,7 +91,7 @@ export default {
             icon="fa-solid fa-eye-slash"
           />
         </div>
-        <div class="login-button" @click="login">Đăng nhập</div>
+        <button class="login-button" @click="login">Đăng nhập</button>
         <p class="login-with">hoặc đăng nhập bằng</p>
         <div
           style="

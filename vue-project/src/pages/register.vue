@@ -1,4 +1,39 @@
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      fullname: "",
+      name: "",
+      password: "",
+      email:""
+    };
+  },
+  methods: {
+    register() {
+      fetch("http://127.0.0.1:8888/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullname: this.fullname,
+          name: this.username,
+          hashpassword: this.password,
+          email: this.email
+        }),
+      })
+        .then((resp) => resp.json())
+        .then((resp) => {
+          console.log(resp);
+          if (resp.result = 200) {
+            alert("Đăng ký thành công");
+            return;
+          }
+        });
+    },
+  },
+};
+</script>
 
 <template>
   <div id="signin-form">
@@ -7,10 +42,10 @@
     </div>
     <div id="signin-body">
       <div class="label-input_sig">Họ và tên</div>
-      <input type="text" placeholder="Nhập họ và tên của bạn" />
+      <input type="text" placeholder="Nhập họ và tên của bạn" v-model="fullname"/>
 
       <div class="label-input_sig">Tên đăng nhập</div>
-      <input type="text" placeholder="Nhập tên đăng nhập của bạn" />
+      <input type="text" placeholder="Nhập tên đăng nhập của bạn" v-model="name"/>
 
       <div class="label-input_sig">Mật khẩu</div>
       <div class="input-pass" style="position: relative">
@@ -38,7 +73,7 @@
       </div>
 
       <div class="label-input_sig">Email</div>
-      <input type="text" placeholder="Nhập email của bạn" />
+      <input type="text" placeholder="Nhập email của bạn" v-model="email"/>
       <div style="display: flex; margin-top: 24px">
         <input style="margin-left: 0px; display: block" type="checkbox" />
         <label style="margin-left: 3px">
@@ -46,7 +81,7 @@
           <router-link to="#">điều kiện và điều khoản</router-link>
         </label>
       </div>
-      <div class="signin-button">Đăng ký</div>
+      <button class="signin-button" @click="register">Đăng ký</button>
       <div style="border: 1px solid #EEE; margin-top: 30px; margin-bottom: 20px; position: relative;">
         <p class="signin-with" style="position: absolute; left: 50%; transform: translate(-50%, -50%); background-color: white;">Hoặc</p>
       </div>
@@ -203,6 +238,10 @@ body {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+.signin-button:hover {
+  width: 300px;
+  height: 30px;
 }
 
 .signin-with {

@@ -9,7 +9,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func PostUserRegisLogic(req types.PostUserRegisReq) error {
+func PostUserRegisLogic(req types.PostUserRegisReq) (*types.Result,error) {
 	db, err := database.DBConn()
 	defer db.Close()
 	if err != nil {
@@ -25,5 +25,8 @@ func PostUserRegisLogic(req types.PostUserRegisReq) error {
 		log.Fatal(err)
 	}
 
-	return nil
+	return &types.Result{
+			Code: 200, 
+			Message: "thành công",
+	},nil
 }

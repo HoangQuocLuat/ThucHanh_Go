@@ -16,12 +16,12 @@ func PostUserHandler() gin.HandlerFunc {
 			panic(err)
 		}
 
-		err = controllers.PostUserRegisLogic(req)
+		res, err := controllers.PostUserRegisLogic(req)
 		if err != nil {
 			ctx.JSON(http.StatusNotFound, nil)
 			return
 		}
 
-		ctx.JSON(http.StatusOK, gin.H{"mes": "Đăng ký thành công"})
+		ctx.JSON(http.StatusOK, res)
 	}
 }
