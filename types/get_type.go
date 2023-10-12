@@ -41,3 +41,9 @@ type PutUserReq struct {
 	Hashpassword string `json:"hashpassword"`
 	Email        string `json:"email"`
 }
+
+type GetInfor struct {
+	ID           int64  `json:"id"`
+	Fullname     string `json:"fullname"`
+	Email        string `json:"email"`
+}

@@ -17,7 +17,7 @@ export default {
         },
         body: JSON.stringify({
           fullname: this.fullname,
-          name: this.username,
+          name: this.name,
           hashpassword: this.password,
           email: this.email
         }),
@@ -115,7 +115,7 @@ export default {
       </div>
       <p class="footer">
         Bạn đã có tài khoản rồi?
-        <router-link to="/register">Đăng nhập</router-link>
+        <router-link to="/login">Đăng nhập</router-link>
       </p>
     </div>
   </div>

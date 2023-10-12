@@ -2,13 +2,11 @@ package controllers
 
 import (
 	"log"
-	"strconv"
 	"thuchanh_go/database"
 	"thuchanh_go/models"
 	"thuchanh_go/types"
-	"time"
+	"thuchanh_go/utils"
 
-	"github.com/dgrijalva/jwt-go"
 	"github.com/zeromicro/go-zero/core/logx"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -41,13 +39,8 @@ func GetUserLogic(req types.GetUserReq) (*types.GetUserRes, error) {
 			},
 		}, nil
 	}
-	//xu ly data
-	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
-		Issuer:    strconv.Itoa(int(user.ID)),
-		ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
-	})
 
-	token, err := claims.SignedString([]byte(SecretKey))
+	token, err := utils.GenerateJWT(user.ID, SecretKey)
 	logx.Info(err)
 	if err != nil {
 		return &types.GetUserRes{
@@ -58,7 +51,6 @@ func GetUserLogic(req types.GetUserReq) (*types.GetUserRes, error) {
 		}, nil
 	}
 
-	
 	return &types.GetUserRes{
 		ID:       user.ID,
 		Fullname: user.Fullname,
