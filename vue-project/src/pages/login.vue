@@ -91,7 +91,7 @@ export default {
             icon="fa-solid fa-eye-slash"
           />
         </div>
-        <button class="login-button" @click="login">Đăng nhập</button>
+        <button class="signin-button" @click="login">Đăng nhập</button>
         <p class="login-with">hoặc đăng nhập bằng</p>
         <div
           style="

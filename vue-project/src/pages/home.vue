@@ -58,13 +58,13 @@ export default {
 };
 </script>
 <template>
-  <div id="home">
-    <h1 style="">Home</h1>
-    <div>
-      <p>ID: {{ user.id }}</p>
-      <p>FullName: {{ user.fullname }}</p>
-      <p>Email: {{ user.email }}</p>
+  <div id="login-form">
+    <h1 class="signin-form-header">Home</h1>
+    <div id="login-body">
+      <h3 style="margin-bottom: 20px;">ID: <span style="color:red;">{{ user.id }}</span></h3>
+      <h3 style="margin-bottom: 20px;">Name: <span style="color:rgb(214, 90, 90);">{{ user.fullname }}</span></h3>
+      <h3 style="margin-bottom: 20px;">Email: <span style="color:rgb(214, 90, 90);">{{ user.email}}</span></h3>
     </div>
-    <button style="height: 20px; width: 30px;"><font-awesome-icon :icon ="['fas', 'right-from-bracket']" @click="logout"/></button>
+    <button class="signin-button"><font-awesome-icon :icon ="['fas', 'right-from-bracket']" @click="logout"/></button>
   </div>
 </template>
