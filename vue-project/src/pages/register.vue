@@ -45,11 +45,10 @@ export default {
         .then((resp) => resp.json())
         .then((resp) => {
           console.log(resp);
-          if (resp.result = 400) {
+          if (resp.code === 400) {
             alert("Tài khoản đã tồn tại");
-            return
-          }
-          if (resp.result = 200) {
+            return;
+          }else if (resp.code === 200) {
             alert("Đăng ký thành công");
             return;
           }
