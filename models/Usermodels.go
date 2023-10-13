@@ -1,8 +1,9 @@
 package models
 
 type UserTbl struct {
-	Username string `db:"username"`
-	Fullname string `db:"fullname"`
-	Email    string `db:"email"`
-	Password string `db:"password"`
+	ID           	int64  	`db:"id"`
+	Fullname     	string 	`db:"fullname"`
+	Name         	string 	`db:"name"`
+	Hashpassword 	string 	`db:"hashpassword"`
+	Email        	string 	`db:"email"`
 }

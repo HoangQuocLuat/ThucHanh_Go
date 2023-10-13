@@ -6,11 +6,11 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-func GenerateJWT(username string, secretKey string) (string, error) {
+func GenerateJWT(id int64, secretKey string) (string, error) {
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 
-	claims["username"] = username
+	claims["id"] = id
 	claims["exp"] = time.Now().Add(time.Hour * 24).Unix()
 
 	tokenString, err := token.SignedString([]byte(secretKey))
