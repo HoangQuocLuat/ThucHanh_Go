@@ -5,11 +5,31 @@ export default {
       fullname: "",
       name: "",
       password: "",
-      email:""
+      email:"",
+      confirmPassword: "",
+      showPassword1: false,
+      showPassword2: false,
     };
   },
+  computed: {
+    passwordsMatch() {
+      return this.password = !this.confirmPassword;
+    },
+  },
   methods: {
+    
+    togglePasswordVisibility(fieldNumber) {
+      if (fieldNumber === 1) {
+        this.showPassword1 = !this.showPassword1;
+      } else if (fieldNumber === 2) {
+        this.showPassword2 = !this.showPassword2;
+      }
+    },
     register() {
+      if (this.password !== this.confirmPassword) {
+        alert("Mật khẩu và mật khẩu nhập lại không khớp.");
+        return;
+      }
       fetch("http://127.0.0.1:8888/user/register", {
         method: "POST",
         headers: {
@@ -25,6 +45,10 @@ export default {
         .then((resp) => resp.json())
         .then((resp) => {
           console.log(resp);
+          if (resp.result = 400) {
+            alert("Tài khoản đã tồn tại");
+            return
+          }
           if (resp.result = 200) {
             alert("Đăng ký thành công");
             return;
@@ -50,25 +74,27 @@ export default {
       <div class="label-input_sig">Mật khẩu</div>
       <div class="input-pass" style="position: relative">
         <input
-          type="password"
+        :type="showPassword1 ? 'text' : 'password'"
           v-model="password"
           placeholder="* * * * * * * *"
         />
         <font-awesome-icon
+          @click="togglePasswordVisibility(1)"
           style="position: absolute; right: 2px; top: 32%"
-          icon="fa-solid fa-eye-slash"
+          :icon="showPassword1 ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
         />
       </div>
       <div class="label-input_sig">Nhập lại mật khẩu</div>
       <div class="input-pass" style="position: relative">
         <input
-          type="password"
-          v-model="password"
+          :type="showPassword2 ? 'text' : 'password'"
+          v-model="confirmPassword"
           placeholder="* * * * * * * *"
         />
         <font-awesome-icon
+          @click="togglePasswordVisibility(2)"
           style="position: absolute; right: 2px; top: 32%"
-          icon="fa-solid fa-eye-slash"
+          :icon="showPassword2 ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
         />
       </div>
 
@@ -220,7 +246,7 @@ body {
   margin-top: 40px;
   display: flex;
   width: 245px;
-  height: 20px;
+  height: 45px;
   padding: 15px 15px;
   justify-content: center;
   align-items: center;
@@ -240,8 +266,7 @@ body {
   line-height: normal;
 }
 .signin-button:hover {
-  width: 300px;
-  height: 30px;
+  background: var(--Green, #7e3d3d);
 }
 
 .signin-with {

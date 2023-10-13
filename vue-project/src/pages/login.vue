@@ -24,9 +24,13 @@ export default {
     return {
       username: "",
       password: "",
+      showPassword: false,
     };
   },
   methods: {
+    togglePasswordVisibility() {
+      this.showPassword = !this.showPassword;
+    },
     login() {
       fetch("http://127.0.0.1:8888/user/login", {
         method: "POST",
@@ -46,7 +50,6 @@ export default {
             return;
           }
           setCookie("token", resp.token.token, 1);
-
           this.$router.push("/home");
         });
     },
@@ -76,7 +79,7 @@ export default {
             margin-top: 40px;
             display: flex;
             justify-content: space-between;
-            width: 462px;
+            width: 440px;
           "
         >
           <span class="label-input">Mật khẩu</span
@@ -85,13 +88,14 @@ export default {
           >
         </div>
         <div style="position: relative">
-          <input type="password" v-model="password" />
+          <input :type="showPassword ? 'text' : 'password'" v-model="password" />
           <font-awesome-icon
+            @click="togglePasswordVisibility"
             style="position: absolute; right: 2px; top: 32%"
-            icon="fa-solid fa-eye-slash"
+            :icon="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
           />
         </div>
-        <button class="signin-button" @click="login">Đăng nhập</button>
+        <button class="login-button" @click="login">Đăng nhập</button>
         <p class="login-with">hoặc đăng nhập bằng</p>
         <div
           style="
@@ -179,7 +183,7 @@ body {
 
 #login-body input {
   display: flex;
-  width: 440px;
+  width: 416px;
   height: 22px;
   padding: 16px 15px;
   align-items: flex-start;
@@ -204,7 +208,7 @@ body {
   margin-top: 40px;
   display: flex;
   width: 440px;
-  height: 20px;
+  height: 45px;
   padding: 15px 15px;
   justify-content: center;
   align-items: center;
@@ -222,6 +226,9 @@ body {
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+}
+.login-button:hover {
+  background: var(--Green, #7e3d3d);
 }
 
 .login-with {
