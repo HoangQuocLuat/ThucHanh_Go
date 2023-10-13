@@ -65,6 +65,6 @@ export default {
       <h3 style="margin-bottom: 20px;">Name: <span style="color:rgb(214, 90, 90);">{{ user.fullname }}</span></h3>
       <h3 style="margin-bottom: 20px;">Email: <span style="color:rgb(214, 90, 90);">{{ user.email}}</span></h3>
     </div>
-    <button class="signin-button"><font-awesome-icon :icon ="['fas', 'right-from-bracket']" @click="logout"/></button>
+    <button class="signin-button" @click="logout"><font-awesome-icon :icon ="['fas', 'right-from-bracket']"/></button>
   </div>
 </template>
