@@ -38,6 +38,7 @@ export default {
     let token = getCookie("token");
     if (!token) {
       this.$router.push("/login");
+      return
     }
 
     let payload = (parseJwt(token))
@@ -46,6 +47,7 @@ export default {
       headers: { 'Authorization': 'Bearer ' + token }
     }).then(res => res.json()).then(
       res => {
+        console.log(res)
         this.user = res
       })
   },
@@ -55,6 +57,7 @@ export default {
         this.$router.push('/login')
     }
   }
+ 
 };
 </script>
 <template>
@@ -63,7 +66,7 @@ export default {
     <div id="login-body">
       <h3 style="margin-bottom: 20px;">ID: <span style="color:red;">{{ user.id }}</span></h3>
       <h3 style="margin-bottom: 20px;">Name: <span style="color:rgb(214, 90, 90);">{{ user.fullname }}</span></h3>
-      <h3 style="margin-bottom: 20px;">Email: <span style="color:rgb(214, 90, 90);">{{ user.email}}</span></h3>
+      
     </div>
     <button class="signin-button" @click="logout"><font-awesome-icon :icon ="['fas', 'right-from-bracket']"/></button>
   </div>

@@ -50,6 +50,7 @@ export default {
             return;
           }else if (resp.code === 200) {
             alert("Đăng ký thành công");
+            this.$router.push("/login")
             return;
           }
         });

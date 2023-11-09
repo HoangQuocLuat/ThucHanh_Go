@@ -1,7 +1,7 @@
 package main
 
 import (
-	"thuchanh_go/handler"
+	"thuchanh_go/routes/authR"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -21,12 +21,11 @@ func main() {
 	}))
 
 	// router
-	r.POST("/user/login", handler.LoginUserHandler())
-	r.POST("/user/register", handler.PostUserHandler())
-	r.GET("user/infor/:user_id", handler.GetUserHandler())
-	r.PUT("user/upacc/:user_id", handler.PutUserHandler())
-
-	
+	// r.POST("/user/login", handler.LoginUserHandler())
+	// r.POST("/user/register", handler.PostUserHandler())
+	// r.GET("user/infcor/:user_id", handler.GetUserHandler())
+	// r.PUT("user/upacc/:user_id", handler.PutUserHandler())
+	authR.AuthRoutes(r)
 
 	// run server
 	r.Run("127.0.0.1:8888")
