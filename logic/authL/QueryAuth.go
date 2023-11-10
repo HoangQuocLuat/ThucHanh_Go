@@ -3,11 +3,12 @@ package authL
 import (
 	"database/sql"
 	"thuchanh_go/config/db"
+	"thuchanh_go/types"
 	"thuchanh_go/utils"
 )
 type UserRes struct {
 	Result Result     `json:"result"`
-	Data   User `json:"data"`
+	Data   User 	  `json:"data"`
 }
 type Result struct {
 	Code    int64  `json:"code"`
@@ -38,6 +39,7 @@ func (req *RegisterReq) Insert() (sql.Result, error) {
 
 type Login interface {
 	Find() (User, error)
+	
 }
 type LoginReq struct {
 	Username string `json:"username"`
@@ -54,7 +56,7 @@ type Token struct {
 	Token string `json:"token"`
 }
 
-func (req *LoginReq) Find()(User, error) {
+func () Find(req *types.LoginReq)(User, error) {
 	db.ConnectDb()
 	var user User
 
