@@ -8,10 +8,10 @@ import (
 func DBConn() (*sql.DB, error) {
 	dbDriver 	:= "mysql"
 	dbUser		:= "root"
-	dbPass		:= "HoangLuat123"
+	dbPass		:= "123"
 	dbName 		:= "thuchanh"
 
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(ThucHanh:3306)/"+dbName)
 
 	if err != nil {
 		panic(err.Error())

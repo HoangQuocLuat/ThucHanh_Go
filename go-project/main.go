@@ -24,5 +24,5 @@ func main() {
 	r.POST("/user/register", handler.PostUserHandler())
 	r.GET("user/infor/:user_id", handler.GetUserHandler())
 	// run server
-	r.Run("127.0.0.1:8888")
+	r.Run("0.0.0.0:8888")
 }
