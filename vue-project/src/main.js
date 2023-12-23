@@ -1,9 +1,9 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import Login from "./pages/Login.vue";
-import Register from "./pages/Register.vue";
-import Home from "./pages/Home.vue"
+import Login from "./pages/login.vue";
+import Register from "./pages/register.vue";
+import Home from "./pages/home.vue"
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
