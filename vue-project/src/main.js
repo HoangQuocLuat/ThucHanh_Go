@@ -3,7 +3,8 @@ import App from "./App.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import Login from "./pages/login.vue";
 import Register from "./pages/register.vue";
-import Home from "./pages/home.vue"
+import Home from "./pages/home.vue";
+import Mess from "./pages/mess.vue"
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -23,6 +24,8 @@ const routes = [
   { path: "/login", component: Login },
   { path: "/register", component: Register },
   { path: "/home", component: Home},
+  { path: "/mess", component: Mess},y
+  
 ];
 
 const router = createRouter({
