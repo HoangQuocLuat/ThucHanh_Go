@@ -5,7 +5,7 @@ export default {
       fullname: "",
       name: "",
       password: "",
-      email:"",
+      email: "",
       confirmPassword: "",
       showPassword1: false,
       showPassword2: false,
@@ -13,11 +13,10 @@ export default {
   },
   computed: {
     passwordsMatch() {
-      return this.password = !this.confirmPassword;
+      return (this.password = !this.confirmPassword);
     },
   },
   methods: {
-    
     togglePasswordVisibility(fieldNumber) {
       if (fieldNumber === 1) {
         this.showPassword1 = !this.showPassword1;
@@ -39,7 +38,7 @@ export default {
           fullname: this.fullname,
           name: this.name,
           hashpassword: this.password,
-          email: this.email
+          email: this.email,
         }),
       })
         .then((resp) => resp.json())
@@ -48,9 +47,9 @@ export default {
           if (resp.code === 400) {
             alert("Tài khoản đã tồn tại");
             return;
-          }else if (resp.code === 200) {
+          } else if (resp.code === 200) {
             alert("Đăng ký thành công");
-            this.$router.push("/login")
+            this.$router.push("/login");
             return;
           }
         });
@@ -60,107 +59,132 @@ export default {
 </script>
 
 <template>
-  <div id="signin-form">
-    <div class="signin-form-header">
-      <span class="title-header">ĐĂNG KÝ TÀI KHOẢN MỚI MIỄN PHÍ</span>
-    </div>
-    <div id="signin-body">
-      <div class="label-input_sig">Họ và tên</div>
-      <input type="text" placeholder="Nhập họ và tên của bạn" v-model="fullname"/>
-
-      <div class="label-input_sig">Tên đăng nhập</div>
-      <input type="text" placeholder="Nhập tên đăng nhập của bạn" v-model="name"/>
-
-      <div class="label-input_sig">Mật khẩu</div>
-      <div class="input-pass" style="position: relative">
+  <div id="regis">
+    <div id="signin-form">
+      <div class="signin-form-header">
+        <span class="title-header">ĐĂNG KÝ TÀI KHOẢN MỚI MIỄN PHÍ</span>
+      </div>
+      <div id="signin-body">
+        <div class="label-input_sig">Họ và tên</div>
         <input
-        :type="showPassword1 ? 'text' : 'password'"
-          v-model="password"
-          placeholder="* * * * * * * *"
+          type="text"
+          placeholder="Nhập họ và tên của bạn"
+          v-model="fullname"
         />
-        <font-awesome-icon
-          @click="togglePasswordVisibility(1)"
-          style="position: absolute; right: 2px; top: 32%"
-          :icon="showPassword1 ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
-        />
-      </div>
-      <div class="label-input_sig">Nhập lại mật khẩu</div>
-      <div class="input-pass" style="position: relative">
-        <input
-          :type="showPassword2 ? 'text' : 'password'"
-          v-model="confirmPassword"
-          placeholder="* * * * * * * *"
-        />
-        <font-awesome-icon
-          @click="togglePasswordVisibility(2)"
-          style="position: absolute; right: 2px; top: 32%"
-          :icon="showPassword2 ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
-        />
-      </div>
 
-      <div class="label-input_sig">Email</div>
-      <input type="text" placeholder="Nhập email của bạn" v-model="email"/>
-      <div style="display: flex; margin-top: 24px">
-        <input style="margin-left: 0px; display: block" type="checkbox" />
-        <label style="margin-left: 3px">
-          Tôi đồng ý với các
-          <router-link to="#">điều kiện và điều khoản</router-link>
-        </label>
-      </div>
-      <button class="signin-button" @click="register">Đăng ký</button>
-      <div style="border: 1px solid #EEE; margin-top: 30px; margin-bottom: 20px; position: relative;">
-        <p class="signin-with" style="position: absolute; left: 50%; transform: translate(-50%, -50%); background-color: white;">Hoặc</p>
-      </div>
-      <div
-        style="display: flex; justify-content: space-around; padding-top: 10px"
-      >
-        <button
-          style="border-radius: 50%; height: 50px; width: 50px; border: none"
-        >
-          <font-awesome-icon
-            style="height: 30px; width: 30px"
-            icon="fa-brands fa-facebook"
+        <div class="label-input_sig">Tên đăng nhập</div>
+        <input
+          type="text"
+          placeholder="Nhập tên đăng nhập của bạn"
+          v-model="name"
+        />
+
+        <div class="label-input_sig">Mật khẩu</div>
+        <div class="input-pass" style="position: relative">
+          <input
+            :type="showPassword1 ? 'text' : 'password'"
+            v-model="password"
+            placeholder="* * * * * * * *"
           />
-        </button>
-        <button
-          style="border-radius: 50%; height: 50px; width: 50px; border: none"
-        >
           <font-awesome-icon
-            style="height: 30px; width: 30px"
-            icon="fa-brands fa-google-plus-g"
+            @click="togglePasswordVisibility(1)"
+            style="position: absolute; right: 2px; top: 32%"
+            :icon="showPassword1 ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
           />
-        </button>
-        <button
-          style="border-radius: 50%; height: 50px; width: 50px; border: none"
-        >
+        </div>
+        <div class="label-input_sig">Nhập lại mật khẩu</div>
+        <div class="input-pass" style="position: relative">
+          <input
+            :type="showPassword2 ? 'text' : 'password'"
+            v-model="confirmPassword"
+            placeholder="* * * * * * * *"
+          />
           <font-awesome-icon
-            style="height: 30px; width: 30px"
-            icon="fa-brands fa-apple"
+            @click="togglePasswordVisibility(2)"
+            style="position: absolute; right: 2px; top: 32%"
+            :icon="showPassword2 ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
           />
-        </button>
+        </div>
+
+        <div class="label-input_sig">Email</div>
+        <input type="text" placeholder="Nhập email của bạn" v-model="email" />
+        <div style="display: flex; margin-top: 24px">
+          <input style="margin-left: 0px; display: block" type="checkbox" />
+          <label style="margin-left: 3px">
+            Tôi đồng ý với các
+            <router-link to="#">điều kiện và điều khoản</router-link>
+          </label>
+        </div>
+        <button class="signin-button" @click="register">Đăng ký</button>
+        <div
+          style="
+            border: 1px solid #eee;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            position: relative;
+          "
+        >
+          <p
+            class="signin-with"
+            style="
+              position: absolute;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background-color: white;
+            "
+          >
+            Hoặc
+          </p>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-around;
+            padding-top: 10px;
+          "
+        >
+          <button
+            style="border-radius: 50%; height: 50px; width: 50px; border: none"
+          >
+            <font-awesome-icon
+              style="height: 30px; width: 30px"
+              icon="fa-brands fa-facebook"
+            />
+          </button>
+          <button
+            style="border-radius: 50%; height: 50px; width: 50px; border: none"
+          >
+            <font-awesome-icon
+              style="height: 30px; width: 30px"
+              icon="fa-brands fa-google-plus-g"
+            />
+          </button>
+          <button
+            style="border-radius: 50%; height: 50px; width: 50px; border: none"
+          >
+            <font-awesome-icon
+              style="height: 30px; width: 30px"
+              icon="fa-brands fa-apple"
+            />
+          </button>
+        </div>
+        <p class="footer">
+          Bạn đã có tài khoản rồi?
+          <router-link to="/login">Đăng nhập</router-link>
+        </p>
       </div>
-      <p class="footer">
-        Bạn đã có tài khoản rồi?
-        <router-link to="/login">Đăng nhập</router-link>
-      </p>
     </div>
   </div>
 </template>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
+#regis{
   background: #f0f2f5;
   display: flex;
   height: auto;
   justify-content: center;
   align-items: center;
 }
-
 #signin-form {
   width: 600px;
   height: auto;
@@ -205,7 +229,7 @@ body {
   /* 137.5% */
 }
 
-#signin-body >input {
+#signin-body > input {
   display: flex;
   width: 440px;
   height: 22px;
@@ -217,7 +241,7 @@ body {
   background: #f7f7f7;
   border: 0px;
 }
-.input-pass >input {
+.input-pass > input {
   display: flex;
   width: 440px;
   height: 22px;
@@ -270,7 +294,6 @@ body {
 }
 
 .signin-with {
-  
   color: var(--light-transparent-greyscale-65, rgba(0, 0, 0, 0.65));
   text-align: center;
   font-family: Roboto;

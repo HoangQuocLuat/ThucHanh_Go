@@ -129,11 +129,7 @@ export default {
 </template>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-}
-body {
+#home {
   background: #f0f2f5;
   display: flex;
   height: 100vh;
