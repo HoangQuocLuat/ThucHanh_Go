@@ -15,6 +15,7 @@ import (
 	router "thuchanh_go/router/acc"
 	"thuchanh_go/ws"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -63,6 +64,16 @@ func main() {
 
 	//khởi tạo gin
 	r := gin.New()
+
+	//CORS
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{"PUT", "POST", "GET", "DELETE"},
+		AllowHeaders:     []string{"*"},
+		ExposeHeaders:    []string{"Content-Type"},
+		AllowCredentials: true,
+	}))
+
 	// Router
 	api := router.API{
 		Gin:        r,

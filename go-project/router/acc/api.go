@@ -15,7 +15,7 @@ type API struct {
 
 func (api *API) SetupRoute() {
 	api.Gin.POST("/user/register", api.AccHandler.RegisHandler())
-	api.Gin.GET("/user/login", api.AccHandler.LoginHandler())
+	api.Gin.POST("/user/login", api.AccHandler.LoginHandler())
 
 	api.Gin.POST("/ws/createRoom", api.WebHandler.CreateRoom)
 	api.Gin.GET("ws/joinRoom/:roomId", api.WebHandler.JoinRoom)

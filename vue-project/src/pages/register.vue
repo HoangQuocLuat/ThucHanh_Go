@@ -2,10 +2,11 @@
 export default {
   data() {
     return {
-      fullname: "",
       name: "",
       password: "",
+      username: "",
       email: "",
+      phone:"",
       confirmPassword: "",
       showPassword1: false,
       showPassword2: false,
@@ -26,7 +27,7 @@ export default {
     },
     register() {
       if (this.password !== this.confirmPassword) {
-        alert("Mật khẩu và mật khẩu nhập lại không khớp.");
+        alert("mật khẩu nhập lại không khớp.");
         return;
       }
       fetch("http://127.0.0.1:8888/user/register", {
@@ -35,20 +36,23 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fullname: this.fullname,
           name: this.name,
-          hashpassword: this.password,
+          password: this.password,
+          username: this.username,
           email: this.email,
+          phone: this.phone
         }),
       })
         .then((resp) => resp.json())
         .then((resp) => {
           console.log(resp);
-          if (resp.code === 400) {
+          if (resp.Statuscode === 400) {
+    
             alert("Tài khoản đã tồn tại");
             return;
-          } else if (resp.code === 200) {
-            alert("Đăng ký thành công");
+          } else if (resp.StatusCode === 200) {
+            console.log(resp.Data)
+            alert(resp.Message);
             this.$router.push("/login");
             return;
           }
@@ -69,14 +73,14 @@ export default {
         <input
           type="text"
           placeholder="Nhập họ và tên của bạn"
-          v-model="fullname"
+          v-model="name"
         />
 
         <div class="label-input_sig">Tên đăng nhập</div>
         <input
           type="text"
           placeholder="Nhập tên đăng nhập của bạn"
-          v-model="name"
+          v-model="username"
         />
 
         <div class="label-input_sig">Mật khẩu</div>
@@ -108,6 +112,9 @@ export default {
 
         <div class="label-input_sig">Email</div>
         <input type="text" placeholder="Nhập email của bạn" v-model="email" />
+        <div class="label-input_sig">SĐT</div>
+        <input type="text" placeholder="Nhập sđt của bạn" v-model="phone" />
+
         <div style="display: flex; margin-top: 24px">
           <input style="margin-left: 0px; display: block" type="checkbox" />
           <label style="margin-left: 3px">

@@ -14,7 +14,7 @@
 - websocket
   
 ## Nội dung
-- Luyện tập sử dụng websocket
+- Luyện tập sử dụng websocket 
 - Luyện tập sử dụng redis
 - Luyện tập cấu hình server từ yaml
   

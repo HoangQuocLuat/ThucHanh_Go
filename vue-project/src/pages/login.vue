@@ -38,19 +38,19 @@ export default {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: this.username,
-          hashpassword: this.password,
+          username: this.username,
+          password: this.password,
         }),
       })
         .then((resp) => resp.json())
         .then((resp) => {
           console.log(resp);
-          if (resp.result.code != 200) {
+          if (resp.StatusCode != 200) {
             alert("Thông tin tài khoản không chính xác ");
             return;
           }
-          setCookie("token", resp.token.token, 1);
-          this.$router.push("/home");
+          setCookie("token", resp.Data.token, 1);
+          this.$router.push("/mess");
         });
     },
   },
