@@ -3,9 +3,9 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
-	"strconv"
 	"thuchanh_go/banana"
 	"thuchanh_go/logic"
 	"thuchanh_go/models"
@@ -119,7 +119,12 @@ func (a *AccountHandler) LoginHandler() gin.HandlerFunc {
 		}
 
 		// Tạo JWT
-		userID, _ := strconv.ParseInt(user.ID, 10, 64)
+		fmt.Print(user.ID)
+		userID, err := utils.UuidToUint64(user.ID)
+		if err != nil {
+			fmt.Println(err.Error())
+		}
+		fmt.Println(userID)
 		token, err := utils.GenerateJWT(userID, banana.Secretkey)
 
 		// Lưu thông tin người dùng vào Redis
@@ -138,6 +143,24 @@ func (a *AccountHandler) LoginHandler() gin.HandlerFunc {
 			StatusCode: http.StatusOK,
 			Message:    "Đăng nhập thành công",
 			Data:       user,
+		})
+	}
+}
+
+func (a *AccountHandler) InforHandler() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		var req req.UserInforReq
+		var err = ctx.ShouldBindUri(&req)
+		if err != nil {
+			err.Error()
+		}
+		log.Print(req)
+		res, err := a.UserLogic.GetInfor(&gin.Context{}, req)
+
+		ctx.JSON(http.StatusOK, models.Response{
+			StatusCode: http.StatusOK,
+			Message:    "Lấy thông tin thành công",
+			Data:       res,
 		})
 	}
 }

@@ -42,5 +42,3 @@ app.use(Collapse);
 app.use(CollapsePanel);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.mount("#app"); 
-
-app.config.globalProperties.$message = message;

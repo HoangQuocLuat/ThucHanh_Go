@@ -2,6 +2,7 @@ package chathandler
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"thuchanh_go/logic"
 	"thuchanh_go/models"
@@ -39,20 +40,15 @@ func (h *Handler) CreateRoom(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusOK, models.Response{
+		StatusCode: http.StatusOK,
+		Message:    "Tạo phòng thành công",
+		Data:       res,
+	})
 }
 
 func (h *Handler) GetRooms(c *gin.Context) {
-	var req req.CreateRoomReq
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, models.Response{
-			StatusCode: http.StatusBadRequest,
-			Message:    err.Error(),
-			Data:       nil,
-		})
-		return
-	}
-	res, err := h.Chat.Select(c, req)
+	res, err := h.Chat.Select(c)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, models.Response{
 			StatusCode: http.StatusUnauthorized,
@@ -110,21 +106,31 @@ func (h *Handler) JoinRoom(c *gin.Context) {
 	fmt.Print("bbbb", ms)
 }
 
-// func (h *Handler) GetClient(c *gin.Context) {
-// 	var client []res.ClientRes
-// 	roomId := c.Param("roomId")
+func (h *Handler) OutRoom(c *gin.Context) {
+	// conn, err := upgrader.Upgrade(c.Writer, c.Request, nil)
+	// if err != nil {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	// 	return
+	// }
 
-// 	if _, ok := h.Hub.Rooms[roomId]; !ok {
-// 		client = make([]res.ClientRes, 0)
-// 		c.JSON(http.StatusOK, client)
-// 	}
+	roomID := c.Param("roomId")
+	// username := c.Query("username")
+	var ReqOutRoom req.ReqOutRoom
+	if err := c.ShouldBindJSON(&ReqOutRoom); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	log.Print("truy cập thành công outRoom")
 
-// 	for _, c := range h.Hub.Rooms[roomId].Clients {
-// 		client = append(client, res.ClientRes{
-// 			ID:       c.ID,
-// 			Username: c.Username,
-// 		})
-// 	}
+	ms := &req.Message{
+		Content: "A user exit the room",
+		RoomID:  roomID,
+		Sender:  "System",
+	}
 
-// 	c.JSON(http.StatusOK, client)
-// }
+	//phát tin nhắn trong phòng
+	h.Room.Broadcast <- ms
+	exitClient := &ws.Client{ID: ReqOutRoom.UserID}
+	//thoát khỏi phòng
+	h.Room.Unregister <- exitClient
+}

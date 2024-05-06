@@ -73,7 +73,6 @@ func (c *Client) ReadMess(room *Room) {
 		err = c.Chat.InsertMess(context.Background(), message)
 		if err != nil {
 			log.Println("Error inserting message:", err)
-			continue // Bạn có thể xử lý lỗi ở đây tùy theo yêu cầu của bạn
 		}
 		room.Broadcast <- &message
 

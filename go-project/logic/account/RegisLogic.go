@@ -3,6 +3,7 @@ package logicacc
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"thuchanh_go/banana"
 	"thuchanh_go/database"
 	"thuchanh_go/logic"
@@ -54,5 +55,20 @@ func (a *AccRegisterLogic) Select(ctx context.Context, req req.UserLoginReq) (mo
 		return user, err
 	}
 
+	return user, nil
+}
+
+func (a *AccRegisterLogic) GetInfor(ctx context.Context, req req.UserInforReq) (models.Account, error) {
+	var user = models.Account{}
+	statement := "SELECT * FROM users WHERE id=$1"
+	err := a.sql.Db.GetContext(ctx, &user, statement, req.Id)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return user, banana.UserNotFoud
+		}
+		log.Error(err.Error())
+		return user, err
+	}
+	fmt.Print(user)
 	return user, nil
 }

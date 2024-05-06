@@ -40,10 +40,9 @@ export default {
       this.$router.push("/login");
       return
     }
-
     let payload = (parseJwt(token))
-
-    fetch(`http://127.0.0.1:8888/user/infor/${payload.id}`, {
+    console.log(payload)
+    fetch(`http://127.0.0.1:8888/user/getinfor/${payload.ID}`, {
       headers: { 'Authorization': 'Bearer ' + token }
     }).then(res => res.json()).then(
       res => {

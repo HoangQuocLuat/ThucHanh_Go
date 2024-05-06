@@ -47,7 +47,6 @@ export default {
         .then((resp) => {
           console.log(resp);
           if (resp.Statuscode === 400) {
-    
             alert("Tài khoản đã tồn tại");
             return;
           } else if (resp.StatusCode === 200) {

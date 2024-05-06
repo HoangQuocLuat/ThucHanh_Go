@@ -31,10 +31,10 @@ func (c *ChatRoomLogic) Insert(ctx context.Context, room req.CreateRoomReq) (req
 	return room, nil
 }
 
-func (c *ChatRoomLogic) Select(ctx context.Context, req req.CreateRoomReq) (res.RoomRes, error) {
-	room := res.RoomRes{}
-	statement := `SELECT * FROM room WHERE name = $1`
-	err := c.sql.Db.GetContext(ctx, &room, statement, req.Name)
+func (c *ChatRoomLogic) Select(ctx context.Context) ([]res.RoomRes, error) {
+	room := []res.RoomRes{}
+	statement := `SELECT * FROM room`
+	err := c.sql.Db.SelectContext(ctx, &room, statement)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return room, banana.RoomNotFoud
@@ -42,6 +42,7 @@ func (c *ChatRoomLogic) Select(ctx context.Context, req req.CreateRoomReq) (res.
 		log.Error(err.Error())
 		return room, err
 	}
+	log.Print(room)
 	return room, nil
 }
 

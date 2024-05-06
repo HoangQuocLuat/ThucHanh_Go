@@ -9,4 +9,5 @@ import (
 type AccLogic interface {
 	Insert(ctx context.Context, user models.Account) (models.Account, error)
 	Select(ctx context.Context, req req.UserLoginReq) (models.Account, error)
+	GetInfor(ctx context.Context, req req.UserInforReq) (models.Account, error)
 }

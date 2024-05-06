@@ -9,3 +9,7 @@ type Message struct {
 	Sender  string `json:"sender"`
 	Content string `json:"content"`
 }
+
+type ReqOutRoom struct {
+	UserID string `json:"userId"`
+}
