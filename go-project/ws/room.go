@@ -1,7 +1,6 @@
 package ws
 
 import (
-	"fmt"
 	"thuchanh_go/logic"
 	"thuchanh_go/types/req"
 )
@@ -39,7 +38,6 @@ func (r *Room) Run() {
 		case m := <-r.Broadcast:
 			for _, cl := range r.Clients {
 				cl.Message <- m
-				fmt.Printf(m.Content)
 			}
 		}
 	}

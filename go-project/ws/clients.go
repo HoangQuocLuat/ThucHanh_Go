@@ -2,7 +2,6 @@ package ws
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"thuchanh_go/logic"
 	"thuchanh_go/types/req"
@@ -65,16 +64,10 @@ func (c *Client) ReadMess(room *Room) {
 		}
 		message.RoomID = c.RoomID
 		message.Sender = c.UserName
-		fmt.Printf("AAAAA", message.Content)
-		if c.Chat == nil {
-			log.Println("Biến Chat trong Client là nil. Không thể thực hiện InsertMess.")
-			return
-		}
 		err = c.Chat.InsertMess(context.Background(), message)
 		if err != nil {
 			log.Println("Error inserting message:", err)
 		}
 		room.Broadcast <- &message
-
 	}
 }
